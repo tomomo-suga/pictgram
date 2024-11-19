@@ -11,6 +11,7 @@
 	</parent>
 	<groupId>com.example.pictgram</groupId>
 	<artifactId>pictgram</artifactId>
+	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>pictgram</name>
 	<description>掲示板</description>
@@ -56,6 +57,15 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 	</dependencies>
 
@@ -65,7 +75,37 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>nl.geodienstencentrum.maven</groupId>
+				<artifactId>sass-maven-plugin</artifactId>
+				<version>3.7.2</version>
+				<executions>
+					<execution>
+						<id>compile</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>update-stylesheets</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<resources>
+						<resource>
+							<source>
+								<directory>
+									${basedir}/src/main/resources/static/scss</directory>
+							</source>
+							<destination>
+								${basedir}/src/main/resources/static/css</destination>
+						</resource>
+					</resources>
+					<sassOptions>
+						<cache>false</cache>
+						<always_update>true</always_update>
+					</sassOptions>
+				</configuration>
+			</plugin>
 		</plugins>
-	</build>
 
+	</build>
 </project>
