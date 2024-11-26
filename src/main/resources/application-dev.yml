@@ -11,5 +11,5 @@ spring:
       enabled: true
       debug: true
 
-  image:
-    local: true
+image:
+  local: true

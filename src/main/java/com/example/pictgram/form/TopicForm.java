@@ -21,7 +21,7 @@ public class TopicForm {
 	@ImageByte(max = 2000000)
 	private MultipartFile image;
 
-	private String imateData;
+	private String imageData;
 
 	private String path;
 
