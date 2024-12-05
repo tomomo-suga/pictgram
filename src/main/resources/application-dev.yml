@@ -10,6 +10,10 @@ spring:
     console:
       enabled: true
       debug: true
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
 
 image:
   local: true
