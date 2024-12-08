@@ -13,20 +13,27 @@
 				<div class="col-md-6 mx-auto">
 					<main>
 						<h2 class="author" th:text="${topic.user.name}"></h2>
-						<img src="" th:if="${@environment.getProperty('image.local')}" th:src="${topic.imageData}"
-							class="image" />
-						<img src="" th:unless="${@environment.getProperty('image.local')}" th:src="${topic.path}"
-							class="image" />
-							 <div class="icons">
-								<a th:if="${topic.favorite != null}" rel="nofollow" class="icon convert" data-method="delete" href="/favorite?topic_id=1" th:href="@{'/favorite'}" th:data-topic_id="${topic.id}" th:data-_csrf="${_csrf.token}">
-									<img class="favorite-on" src="/images/icons/heart.png" th:src="@{/images/icons/heart.png}" />  
-								</a>
-								<a th:if="${topic.favorite == null}" rel="nofollow" class="icon convert" data-method="post" href="/favorite?topic_id=1" th:href="@{'/favorite'}" th:data-topic_id="${topic.id}" th:data-_csrf="${_csrf.token}">
-									<img src="/images/icons/heart-black.png" th:src="@{/images/icons/heart-black.png}" />
-								</a>
-								<span class="count" th:text="${#lists.size(topic.favorites)}">0</span>
-							</div>
+						<img src="" th:if="${@environment.getProperty('image.local')}" th:src="${topic.imageData}" class="image" />
+						<img src="" th:unless="${@environment.getProperty('image.local')}" th:src="${topic.path}" class="image" />
+						<div class="icons">
+							<a th:if="${topic.favorite != null}" rel="nofollow" class="icon convert" data-method="delete" href="/favorite?topic_id=1" th:href="@{'/favorite'}" th:data-topic_id="${topic.id}" th:data-_csrf="${_csrf.token}">
+								<img class="favorite-on" src="/images/icons/heart.png" th:src="@{/images/icons/heart.png}" />  
+							</a>
+							<a th:if="${topic.favorite == null}" rel="nofollow" class="icon convert" data-method="post" href="/favorite?topic_id=1" th:href="@{'/favorite'}" th:data-topic_id="${topic.id}" th:data-_csrf="${_csrf.token}">
+								<img src="/images/icons/heart-black.png" th:src="@{/images/icons/heart-black.png}" />
+							</a>
+							<span class="count" th:text="${#lists.size(topic.favorites)}">0</span>
+							<a href="/topics/1/comments/new" th:href="@{'/topics/{id}/comments/new'(id=${topic.id})}" class="icon" th:data-_csrf="${_csrf.token}">
+								<img src="/images/icons/comment.png" th:src="@{/images/icons/comment.png}" />
+							</a>
+						</div>
 						<pre class="description" th:text="${topic.description}"></pre>
+						<div class="comments">
+							<h3 class='text-center' th:text="#{topics.index.comment}">コメント</h3>
+							<ul th:each="comment : ${topic.comments}">
+								<li><pre class="description" th:text="${comment.description}"></pre></li>
+							</ul>
+						</div>
 					</main>
 				</div>
 			</div>
