@@ -31,9 +31,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.pictgram.entity.Comment;
 import com.example.pictgram.entity.Favorite;
 import com.example.pictgram.entity.Topic;
 import com.example.pictgram.entity.UserInf;
+import com.example.pictgram.form.CommentForm;
 import com.example.pictgram.form.FavoriteForm;
 import com.example.pictgram.form.TopicForm;
 import com.example.pictgram.form.UserForm;
@@ -76,6 +78,8 @@ public class TopicsController {
 		modelMapper.typeMap(Topic.class, TopicForm.class).addMappings(mapper -> mapper.skip(TopicForm::setUser));
 
 		modelMapper.typeMap(Topic.class, TopicForm.class).addMappings(mapper -> mapper.skip(TopicForm::setFavorites));
+		modelMapper.typeMap(Topic.class, TopicForm.class).addMappings(mapper -> mapper.skip(TopicForm::setComments)); 
+
 		modelMapper.typeMap(Favorite.class, FavoriteForm.class)
 				.addMappings(mapper -> mapper.skip(FavoriteForm::setTopic));
 
@@ -115,6 +119,15 @@ public class TopicsController {
 			}
 		}
 		form.setFavorites(favorites);
+		
+		List<CommentForm> comments = new ArrayList<CommentForm>();
+		
+		for (Comment commentEntity : entity.getComments()) {
+			CommentForm comment = modelMapper.map(commentEntity, CommentForm.class);
+			comments.add(comment);
+		}
+		form.setComments(comments);
+		
 
 		return form;
 	}
