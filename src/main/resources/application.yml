@@ -4,20 +4,28 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:pictgram
-    username: sa
-    password: 
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:mem:pictgram
+#    username: sa
+#    password: 
 
-  h2:
-    console:
-      enabled: true
+# h2:
+#   console:
+#     enabled: true
 
   servlet:
     multipart:
       max-file-size: 20MB
       max-request-size: 20MB
+
+  jpa:
+    database: POSTGRESQL 
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/pictgram
+    username: ${psql.user}
+    password: ${psql.password} 
 
 image:
   local: true
