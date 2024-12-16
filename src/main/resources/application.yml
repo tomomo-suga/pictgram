@@ -1,31 +1,33 @@
-# h2 http://localhost:8080/h2-console
 spring:
   mvc:
     hiddenmethod:
       filter:
         enabled: true
-#  datasource:
-#    driver-class-name: org.h2.Driver
-#    url: jdbc:h2:mem:pictgram
-#    username: sa
-#    password: 
-
-# h2:
-#   console:
-#     enabled: true
-
-  servlet:
-    multipart:
-      max-file-size: 20MB
-      max-request-size: 20MB
-
+    servlet:
+      multipart:
+        max-file-size: 20MB
+        max-request-size: 20MB
   jpa:
     database: POSTGRESQL 
   datasource:
-    driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/pictgram
-    username: ${psql.user}
-    password: ${psql.password} 
-
+      driverClassName: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/pictgram
+      username: ${psql.user}
+      password: ${psql.password} 
+  mail:
+    default-encoding: UTF-8
+    protocol: smtp
+    host: ${spring.mail.host}
+    port: ${spring.mail.port}
+    username: ${spring.mail.username}
+    password: ${spring.mail.password}
+    properties: 
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  thymeleaf:
+    check-template-location: false                   
 image:
   local: true
