@@ -31,3 +31,5 @@ spring:
     check-template-location: false                   
 image:
   local: true
+googlemap:
+  key: ${googlemap.key}
