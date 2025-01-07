@@ -177,9 +177,7 @@ public class TopicsController {
 	}
 
 	@PostMapping("/topic")
-	public String create(Principal principal, @Validated @ModelAttribute("form") TopicForm form, BindingResult result,
-			Model model, @RequestParam MultipartFile image, RedirectAttributes redirAttrs, Locale locale)
-			throws IOException {
+	public String create(Principal principal, @Validated @ModelAttribute("form") TopicForm form, BindingResult result, Model model, @RequestParam MultipartFile image, RedirectAttributes redirAttrs, Locale locale) throws ImageProcessingException, IOException, ImageReadException {
 		if (result.hasErrors()) {
 			model.addAttribute("hasMessage", true);
 			model.addAttribute("class", "alert-danger");
@@ -220,7 +218,7 @@ public class TopicsController {
 		return "redirect:/topics";
 	}
 
-	private File saveImageLocal(MultipartFile image, Topic entity) throws IOException {
+	private File saveImageLocal(MultipartFile image, Topic entity) throws IOException, ImageProcessingException, ImageReadException {
 		File uploadDir = new File("/uploads");
 		uploadDir.mkdir();
 
@@ -233,6 +231,7 @@ public class TopicsController {
 		File destFile = new File(realPathToUploads, fileName);
 		image.transferTo(destFile);
 
+		setGeoInfo(entity, destFile, image.getOriginalFilename());
 		return destFile;
 	}
 
