@@ -33,10 +33,13 @@ spring:
         registration:
           google:
             client-id: ${google.client.id}
-            client-secret: ${google.client.secret}            
+            client-secret: ${google.client.secret}
+          github:
+            clientId: ${github.client.id}
+            clientSecret: ${github.client.secret}      
   thymeleaf:
     check-template-location: false                   
 image:
   local: true
 googlemap:
-  key: ${googlemap.key}  
+  key: ${googlemap.key} 
