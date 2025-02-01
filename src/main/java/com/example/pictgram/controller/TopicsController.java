@@ -132,7 +132,7 @@ public class TopicsController {
 
 				data.append(new String(Base64Utils.encode(os.toByteArray()), "ASCII"));
 				form.setImageData(data.toString());
-			}
+			} catch (FileNotFoundException e) {}
 		}
 
 		UserForm userForm = modelMapper.map(entity.getUser(), UserForm.class);
