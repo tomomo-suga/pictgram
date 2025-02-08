@@ -63,7 +63,7 @@
 						<div class="comments">
 							<h3 class='text-center' th:text="#{topics.index.comment}">コメント</h3>
 							<ul th:each="comment : ${topic.comments}">
-								<li>
+								<li><span th:text="${comment.user.name}"></span>
 									<pre class="description" th:text="${comment.description}"></pre>
 								</li>
 							</ul>
